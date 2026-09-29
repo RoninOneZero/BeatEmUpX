@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dihi7bw3k4svv"]
+
+[ext_resource type="Script" uid="uid://m6ncn3d7n1vk" path="res://src/game_state/GameState.cs" id="1_yxi78"]
+[ext_resource type="Script" uid="uid://dxlaipq0i5tfd" path="res://src/game_state/CombatManager.cs" id="2_jerle"]
+[ext_resource type="Script" uid="uid://m5skexkbqk38" path="res://src/game_state/Inventory.cs" id="3_an7m6"]
+[ext_resource type="PackedScene" uid="uid://bx6amn383sorp" path="res://src/game_state/battle_slot_manager.tscn" id="3_rriys"]
+[ext_resource type="Script" uid="uid://j4vsuadggp2k" path="res://src/game_state/Random.cs" id="4_gwv7o"]
+
+[node name="GameState" type="Node" unique_id=1188003277]
+script = ExtResource("1_yxi78")
+
+[node name="CombatManager" type="Node" parent="." unique_id=1571779282 node_paths=PackedStringArray("BattleSlotManager")]
+script = ExtResource("2_jerle")
+BattleSlotManager = NodePath("BattleSlotManager")
+BattleSlotPrefab = ExtResource("3_rriys")
+
+[node name="BattleSlotManager" parent="CombatManager" unique_id=306963876 instance=ExtResource("3_rriys")]
+visible = false
+
+[node name="Inventory" type="Node" parent="." unique_id=783902156]
+script = ExtResource("3_an7m6")
+
+[node name="Random" type="Node" parent="." unique_id=501011775]
+script = ExtResource("4_gwv7o")
+
+[connection signal="PlayerDied" from="CombatManager" to="." method="OnPlayerDied"]

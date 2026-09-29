@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bquef1htmtua5"]
+
+[ext_resource type="Script" uid="uid://62dnmy33poiw" path="res://src/global/Global.cs" id="1_ht8r2"]
+
+[node name="Global" type="Node" unique_id=1460194892]
+script = ExtResource("1_ht8r2")
+Levels = Array[String](["uid://dp5v2wmk8xxjo"])

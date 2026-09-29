@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://b1hre8bens0me"]
+
+[ext_resource type="Script" uid="uid://gy5nnvim1et7" path="res://src/main/Main.cs" id="1_dy74i"]
+[ext_resource type="PackedScene" uid="uid://dihi7bw3k4svv" path="res://src/game_state/game_state.tscn" id="2_834u0"]
+[ext_resource type="Script" uid="uid://dp3uf14c5fegh" path="res://src/main/SaveLoad.cs" id="3_dy74i"]
+[ext_resource type="Script" uid="uid://cjh00ll70812v" path="res://src/main/Debug.cs" id="4_834u0"]
+[ext_resource type="PackedScene" uid="uid://cvkf84fhkt065" path="res://scenes/game_over_control/game_over_control.tscn" id="4_ep4vx"]
+[ext_resource type="PackedScene" uid="uid://udu1upuel7ts" path="res://scenes/victory_screen/victory_screen.tscn" id="5_ep4vx"]
+
+[node name="Main" type="Node" unique_id=1782487472 node_paths=PackedStringArray("GameOverControl", "VictoryScreen")]
+script = ExtResource("1_dy74i")
+TitleScreenFile = "uid://1gavif5pdsm1"
+GameOverControl = NodePath("UserInterface/GameOverControl")
+VictoryScreen = NodePath("UserInterface/VictoryScreen")
+
+[node name="GameState" parent="." unique_id=1188003277 instance=ExtResource("2_834u0")]
+
+[node name="SaveLoad" type="Node" parent="." unique_id=1091870073]
+script = ExtResource("3_dy74i")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=422833772]
+bus = &"Music"
+
+[node name="UserInterface" type="CanvasLayer" parent="." unique_id=679672994]
+
+[node name="GameOverControl" parent="UserInterface" unique_id=1303597106 instance=ExtResource("4_ep4vx")]
+
+[node name="VictoryScreen" parent="UserInterface" unique_id=780656243 instance=ExtResource("5_ep4vx")]
+
+[node name="Debug" type="Node" parent="." unique_id=526836844]
+script = ExtResource("4_834u0")
+
+[connection signal="GameOver" from="GameState" to="." method="OnGameOver"]
+[connection signal="ContinueRequested" from="UserInterface/GameOverControl" to="." method="OnContinueRequested"]
+[connection signal="MainMenuRequested" from="UserInterface/GameOverControl" to="." method="OnMainMenuRequested"]
+[connection signal="QuitGameRequested" from="UserInterface/GameOverControl" to="." method="OnQuitGameRequested"]
+[connection signal="MainMenuRequested" from="UserInterface/VictoryScreen" to="." method="OnMainMenuRequested"]
+[connection signal="QuitGameRequested" from="UserInterface/VictoryScreen" to="." method="OnQuitGameRequested"]

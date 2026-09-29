@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b3ooabwefqoye"]
+
+[ext_resource type="Script" uid="uid://ce7joqjm6e2ud" path="res://scenes/spawner/Spawner.cs" id="1_eoeca"]
+[ext_resource type="Resource" uid="uid://dlpckarcvpni1" path="res://scenes/actors/BaseEnemy/BaseEnemySpawnData.tres" id="2_wtxcb"]
+
+[node name="Spawner" type="Node2D" unique_id=1410879494]
+script = ExtResource("1_eoeca")
+SpawnData = ExtResource("2_wtxcb")
+SelectSpawnMethod = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=856185063]
+scale = Vector2(8, 8)
+offset = Vector2(0, -28)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=2096260735]
+rect = Rect2(-96, -10, 192, 20)
+
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="OnScreenEntered"]

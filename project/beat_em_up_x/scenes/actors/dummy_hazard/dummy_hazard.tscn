@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bcdvx3qsdo0kn"]
+
+[ext_resource type="Script" uid="uid://dyvwj4tub00k0" path="res://scenes/actors/dummy_hazard/DummyHazard.cs" id="1_sbj52"]
+[ext_resource type="Script" uid="uid://dhbi7idnysbea" path="res://src/gameplay/combat/DamageData.cs" id="2_01hla"]
+[ext_resource type="Texture2D" uid="uid://cakxqolwnbl6k" path="res://assets/icon.svg" id="2_w478w"]
+
+[sub_resource type="Resource" id="Resource_mbbpy"]
+script = ExtResource("2_01hla")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mbbpy"]
+radius = 63.1981
+
+[node name="DummyHazard" type="Area2D" unique_id=961198390]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_sbj52")
+DamageData = SubResource("Resource_mbbpy")
+metadata/_custom_type_script = "uid://bdlurq670id88"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1928722730]
+texture = ExtResource("2_w478w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=178361002]
+shape = SubResource("CircleShape2D_mbbpy")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[connection signal="HitLanded" from="." to="." method="OnHitLanded"]
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dgrr8rs2kb30f"]
+
+[ext_resource type="Script" uid="uid://cig7gwml5c1c6" path="res://scenes/levels/EnemyGate.cs" id="1_kb784"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xewka"]
+normal = Vector2(-1, 0)
+
+[node name="EnemyGate" type="StaticBody2D" unique_id=883331593 groups=["EnemyGates"]]
+collision_mask = 3
+script = ExtResource("1_kb784")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=67056793]
+shape = SubResource("WorldBoundaryShape2D_xewka")
+debug_color = Color(0.2026667, 0.64, 0, 0.41960785)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1853790861]
+
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="OnVisibleOnScreen"]

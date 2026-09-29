@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SpawnData" format=3 uid="uid://dlpckarcvpni1"]
+
+[ext_resource type="Texture2D" uid="uid://c53o7k27lhuqc" path="res://assets/textures/generic_char_v0.2/png/red/char_red_1.png" id="1_0htne"]
+[ext_resource type="Script" uid="uid://bi5gemxjupxjb" path="res://src/gameplay/SpawnData.cs" id="1_xkjmw"]
+[ext_resource type="PackedScene" uid="uid://c8dnmu1s2rlq5" path="res://scenes/actors/BaseEnemy/base_enemy.tscn" id="2_kcus6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhn3r"]
+atlas = ExtResource("1_0htne")
+region = Rect2(0, 0, 56, 56)
+
+[resource]
+script = ExtResource("1_xkjmw")
+SceneToSpawn = ExtResource("2_kcus6")
+PreviewImage = SubResource("AtlasTexture_uhn3r")
+metadata/_custom_type_script = "uid://bi5gemxjupxjb"

@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://bx6amn383sorp"]
+
+[ext_resource type="Script" uid="uid://lbi4cvouly2l" path="res://src/gameplay/combat/BattleSlotManager.cs" id="1_d4sy3"]
+[ext_resource type="Texture2D" uid="uid://cakxqolwnbl6k" path="res://assets/icon.svg" id="2_hcg0l"]
+
+[node name="BattleSlotManager" type="Node2D" unique_id=306963876]
+scale = Vector2(1.7681699, 1.7681699)
+script = ExtResource("1_d4sy3")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=692277157]
+position = Vector2(128, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D" unique_id=976976351]
+modulate = Color(1, 1, 1, 0.5058824)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_hcg0l")
+
+[node name="Marker2D2" type="Marker2D" parent="." unique_id=1822514241]
+position = Vector2(-128, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D2" unique_id=523118572]
+modulate = Color(1, 1, 1, 0.5058824)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_hcg0l")
+
+[node name="Marker2D3" type="Marker2D" parent="." unique_id=1624844231]
+position = Vector2(-64, 64)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D3" unique_id=1155709977]
+modulate = Color(1, 1, 1, 0.5058824)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_hcg0l")
+
+[node name="Marker2D4" type="Marker2D" parent="." unique_id=978098766]
+position = Vector2(64, 64)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D4" unique_id=441444237]
+modulate = Color(1, 1, 1, 0.5058824)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_hcg0l")
+
+[node name="Marker2D5" type="Marker2D" parent="." unique_id=230916813]
+position = Vector2(64, -64)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D5" unique_id=1320225123]
+modulate = Color(1, 1, 1, 0.5058824)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_hcg0l")
+
+[node name="Marker2D6" type="Marker2D" parent="." unique_id=1270022099]
+position = Vector2(-64, -64)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D6" unique_id=1860545462]
+modulate = Color(1, 1, 1, 0.5058824)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_hcg0l")

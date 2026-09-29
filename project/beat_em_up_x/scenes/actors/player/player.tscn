@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://b0rquldkrr8yk"]
+
+[ext_resource type="PackedScene" uid="uid://ctlj0mw4251ei" path="res://scenes/actors/pawn_2d/pawn_2d.tscn" id="1_wmv1v"]
+[ext_resource type="Script" uid="uid://b2ev4icp1chs0" path="res://scenes/actors/player/Player.cs" id="2_8bj4u"]
+[ext_resource type="Script" uid="uid://ds3p1xhvl3lo6" path="res://src/gameplay/InputController.cs" id="2_l17oj"]
+[ext_resource type="SpriteFrames" uid="uid://b0xb3jiiitv8t" path="res://scenes/actors/player/blue_knight.tres" id="2_yg5k4"]
+[ext_resource type="Script" uid="uid://cpmsqya0j45k7" path="res://src/gameplay/finite_state_machine/FiniteStateMachine.cs" id="3_oj104"]
+[ext_resource type="Script" uid="uid://dd6qermeh6hpg" path="res://src/gameplay/combat/Health.cs" id="5_inh5e"]
+[ext_resource type="Script" uid="uid://cqm82wh1su8xr" path="res://scenes/actors/player/states/IdleState.cs" id="6_g2g7f"]
+[ext_resource type="Script" uid="uid://bfdp77mkbg3vj" path="res://src/gameplay/finite_state_machine/AttackState.cs" id="6_qdyt2"]
+[ext_resource type="Script" uid="uid://cu67t0o2knjvn" path="res://scenes/actors/player/states/WalkState.cs" id="7_fp13k"]
+[ext_resource type="Script" uid="uid://6u4hg7g4o617" path="res://scenes/actors/pawn_2d/states/HurtState.cs" id="8_5bhx7"]
+[ext_resource type="Script" uid="uid://buwmcmjfrqdue" path="res://scenes/actors/player/states/BlockState.cs" id="9_4iwnj"]
+[ext_resource type="Script" uid="uid://fogqpilcfg7s" path="res://scenes/actors/pawn_2d/states/DeadState.cs" id="9_i174x"]
+[ext_resource type="Script" uid="uid://uqlji7t6ttfh" path="res://scenes/actors/player/FallState.cs" id="11_hcvpp"]
+[ext_resource type="Script" uid="uid://dqu6wvw48pucw" path="res://scenes/actors/player/JumpState.cs" id="12_inh5e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcvpp"]
+size = Vector2(80, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2g7f"]
+size = Vector2(288, 88)
+
+[sub_resource type="GDScript" id="GDScript_ceijg"]
+script/source = "extends Node
+"
+
+[node name="Player" unique_id=225284280 node_paths=PackedStringArray("InputController") groups=["Player"] instance=ExtResource("1_wmv1v")]
+collision_layer = 2
+script = ExtResource("2_8bj4u")
+InputController = NodePath("InputController")
+
+[node name="AnimatedSprite2D" parent="BodyPivot" parent_id_path=PackedInt32Array(453236791) index="0" unique_id=402589064]
+sprite_frames = ExtResource("2_yg5k4")
+frame_progress = 0.0
+
+[node name="HurtBox" parent="BodyPivot" parent_id_path=PackedInt32Array(453236791) index="1" unique_id=323174682]
+visible = false
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="BodyPivot/HurtBox" index="0" unique_id=1814726359]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_hcvpp")
+
+[node name="HitBox" parent="BodyPivot" parent_id_path=PackedInt32Array(453236791) index="2" unique_id=1427584338]
+visible = false
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="BodyPivot/HitBox" index="0" unique_id=66643450]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_g2g7f")
+
+[node name="InputController" type="Node" parent="." index="4" unique_id=1587636382 node_paths=PackedStringArray("StateMachine", "Pawn")]
+script = ExtResource("2_l17oj")
+StateMachine = NodePath("../FiniteStateMachine")
+Pawn = NodePath("..")
+metadata/_custom_type_script = "uid://ds3p1xhvl3lo6"
+
+[node name="Health" type="Node" parent="." index="5" unique_id=1996418121]
+script = ExtResource("5_inh5e")
+MaxHealth = 6
+metadata/_custom_type_script = "uid://dd6qermeh6hpg"
+
+[node name="FiniteStateMachine" type="Node" parent="." index="6" unique_id=1474738590 node_paths=PackedStringArray("InitialState")]
+script = ExtResource("3_oj104")
+InitialState = NodePath("Idle")
+metadata/_custom_type_script = "uid://cpmsqya0j45k7"
+
+[node name="Idle" type="Node" parent="FiniteStateMachine" index="0" unique_id=1076556621 node_paths=PackedStringArray("AnimatedSprite")]
+script = ExtResource("6_g2g7f")
+AnimatedSprite = NodePath("../../BodyPivot/AnimatedSprite2D")
+
+[node name="Walk" type="Node" parent="FiniteStateMachine" index="1" unique_id=190996101 node_paths=PackedStringArray("AnimatedSprite")]
+script = ExtResource("7_fp13k")
+AnimatedSprite = NodePath("../../BodyPivot/AnimatedSprite2D")
+metadata/_custom_type_script = "uid://cjin36ywjerqo"
+
+[node name="Block" type="Node" parent="FiniteStateMachine" index="2" unique_id=492469713 node_paths=PackedStringArray("AnimatedSprite")]
+script = ExtResource("9_4iwnj")
+AnimatedSprite = NodePath("../../BodyPivot/AnimatedSprite2D")
+metadata/_custom_type_script = "uid://cjin36ywjerqo"
+
+[node name="Attack1" type="Node" parent="FiniteStateMachine" index="3" unique_id=739662025 node_paths=PackedStringArray("AnimatedSprite", "HitBox")]
+script = ExtResource("6_qdyt2")
+AnimatedSprite = NodePath("../../BodyPivot/AnimatedSprite2D")
+HitBox = NodePath("../../BodyPivot/HitBox")
+NextAttack = "attack2"
+metadata/_custom_type_script = "uid://cjin36ywjerqo"
+
+[node name="Attack2" type="Node" parent="FiniteStateMachine" index="4" unique_id=1644619107 node_paths=PackedStringArray("AnimatedSprite", "HitBox")]
+script = ExtResource("6_qdyt2")
+AnimationName = "attack2"
+AnimatedSprite = NodePath("../../BodyPivot/AnimatedSprite2D")
+HitBox = NodePath("../../BodyPivot/HitBox")
+metadata/_custom_type_script = "uid://cjin36ywjerqo"
+
+[node name="Jump" type="Node" parent="FiniteStateMachine" index="5" unique_id=717103235 node_paths=PackedStringArray("AnimatedSprite", "BodyPivot")]
+script = ExtResource("12_inh5e")
+AnimatedSprite = NodePath("../../BodyPivot/AnimatedSprite2D")
+BodyPivot = NodePath("../../BodyPivot")
+metadata/_custom_type_script = "uid://cjin36ywjerqo"
+
+[node name="Fall" type="Node" parent="FiniteStateMachine" index="6" unique_id=152774101 node_paths=PackedStringArray("AnimatedSprite", "BodyPivot")]
+script = ExtResource("11_hcvpp")
+AnimatedSprite = NodePath("../../BodyPivot/AnimatedSprite2D")
+BodyPivot = NodePath("../../BodyPivot")
+metadata/_custom_type_script = "uid://cjin36ywjerqo"
+
+[node name="Hurt" type="Node" parent="FiniteStateMachine" index="7" unique_id=1909966633 node_paths=PackedStringArray("AnimatedSprite", "HurtBox")]
+script = ExtResource("8_5bhx7")
+AnimatedSprite = NodePath("../../BodyPivot/AnimatedSprite2D")
+StateDuration = 0.35
+HurtBox = NodePath("../../BodyPivot/HurtBox")
+metadata/_custom_type_script = "uid://cjin36ywjerqo"
+
+[node name="Dead" type="Node" parent="FiniteStateMachine" index="8" unique_id=304929555 node_paths=PackedStringArray("AnimatedSprite", "HurtBox")]
+script = ExtResource("9_i174x")
+AnimatedSprite = NodePath("../../BodyPivot/AnimatedSprite2D")
+HurtBox = NodePath("../../BodyPivot/HurtBox")
+metadata/_custom_type_script = "uid://cjin36ywjerqo"
+
+[node name="Debug" type="Node" parent="." index="7" unique_id=1151434844]
+script = SubResource("GDScript_ceijg")
+
+[connection signal="DamageTaken" from="BodyPivot/HurtBox" to="." method="OnDamageTaken"]

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dqnlkp5shhwgr"]
+
+[ext_resource type="Script" uid="uid://cmov8oun0xcn8" path="res://scenes/levels/Arena.cs" id="1_6eu43"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ceijg"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6eu43"]
+normal = Vector2(-1, 0)
+
+[node name="Arena" type="Node2D" unique_id=519140855 node_paths=PackedStringArray("SpawnDelay", "RespawnDelay", "Wall1", "Wall2")]
+script = ExtResource("1_6eu43")
+SpawnDelay = NodePath("SpawnDelay")
+RespawnDelay = NodePath("RespawnDelay")
+Wall1 = NodePath("StaticBody2D")
+Wall2 = NodePath("StaticBody2D2")
+
+[node name="SpawnDelay" type="Timer" parent="." unique_id=1614139626]
+wait_time = 0.5
+
+[node name="RespawnDelay" type="Timer" parent="." unique_id=426483474]
+wait_time = 0.1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=326528865]
+process_mode = 4
+position = Vector2(-700, 0)
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1299484333]
+shape = SubResource("WorldBoundaryShape2D_ceijg")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=269211081]
+process_mode = 4
+position = Vector2(700, 0)
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=248129415]
+shape = SubResource("WorldBoundaryShape2D_6eu43")
